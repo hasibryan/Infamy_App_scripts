@@ -6,7 +6,7 @@ import tkinter as tk
 class TkApp:
     def __init__(self):
         self.frame = tk.Tk()
-        self.frame.title("Excel Generator")
+        self.frame.title("CSV Generator")
         self.frame.geometry('400x200')
         self.match_link = tk.StringVar(self.frame)
 
@@ -20,7 +20,7 @@ class TkApp:
         match_label = tk.Label(self.frame, text='Match Link', font=('calibre', 10, 'bold'))
         match_label.pack()
 
-        link = tk.Entry(self.frame, textvariable=self.match_link, font=('calibre', 10, 'normal'))
+        link = tk.Entry(self.frame, textvariable=self.match_link, width=50, font=('calibre', 10, 'normal'))
         btn = tk.Button(self.frame, text='Submit', command=self.get_link)
         link.pack()
         btn.pack()

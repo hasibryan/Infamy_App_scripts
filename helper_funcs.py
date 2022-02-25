@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 
 import pandas as pd
 import requests
-
+import os
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 
@@ -29,6 +29,8 @@ def add_scores(t1, t2, team1_score, team2_score):
     t2["Maps Won"] = maps_played - t1_maps_won
     t2["Maps Lost"] = t1_maps_won
 
+    t1.sort_values(by=["Name"], inplace=True, ascending=True, ignore_index=True)
+    t2.sort_values(by=["Name"], inplace=True, ascending=True, ignore_index=True)
     return t1, t2
 
 
@@ -44,7 +46,9 @@ def parse_table(_match_link):
     # print(team2)
     match_name = team1["Team"][0]+" vs "+team2["Team"][0]
     # print(match_name)
-    pd.concat([team1, team2], axis=0, ignore_index=True).to_csv('the_dump/'+match_name+'.csv')
+    path = 'CSV files'
+    os.makedirs(path, exist_ok=True)
+    pd.concat([team1, team2], axis=0, ignore_index=True).to_csv(path+'/'+match_name+'.csv')
 
 
 def clean_table(df):
