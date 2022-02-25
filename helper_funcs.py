@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 
 import pandas as pd
 import requests
-
+import os
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 
@@ -44,7 +44,9 @@ def parse_table(_match_link):
     # print(team2)
     match_name = team1["Team"][0]+" vs "+team2["Team"][0]
     # print(match_name)
-    pd.concat([team1, team2], axis=0, ignore_index=True).to_csv('the_dump/'+match_name+'.csv')
+    path = 'the_dump'
+    os.makedirs(path, exist_ok=True)
+    pd.concat([team1, team2], axis=0, ignore_index=True).to_csv(path+'/'+match_name+'.csv')
 
 
 def clean_table(df):
