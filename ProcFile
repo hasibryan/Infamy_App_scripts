@@ -1,0 +1,1 @@
+web: gunicorn Fetch_table_app
